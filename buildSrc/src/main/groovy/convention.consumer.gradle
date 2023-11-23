@@ -3,9 +3,15 @@ plugins {
 }
 
 configurations {
-    commonJava.canBeResolved = true
-    commonResources.canBeResolved = true
-    commonAccessWidener.canBeResolved = true
+    commonJava{
+        canBeResolved = true
+    }
+    commonResources{
+        canBeResolved = true
+    }
+    commonAccessWidener{
+        canBeResolved = true
+    }
 }
 
 dependencies {

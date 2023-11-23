@@ -20,8 +20,13 @@ repositories {
     }
 }
 
+configurations {
+    rootProjectLicense.canBeResolved = true
+}
+
 dependencies {
     compileOnly libs.jetbrains.annotations
+    rootProjectLicense project(path: ':', configuration: 'license')
 }
 
 publishing {
@@ -34,13 +39,15 @@ publishing {
 }
 
 sourcesJar {
-    from(rootProject.file("LICENSE")) {
+    dependsOn(configurations.rootProjectLicense)
+    from(configurations.rootProjectLicense) {
         rename { "${it}_${mod_name}" }
     }
 }
 
 jar {
-    from(rootProject.file("LICENSE")) {
+    dependsOn(configurations.rootProjectLicense)
+    from(configurations.rootProjectLicense) {
         rename { "${it}_${mod_name}" }
     }
 
