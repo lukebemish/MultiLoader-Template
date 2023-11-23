@@ -73,7 +73,7 @@ jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        named('mavenJava', MavenPublication) {
             fg.component(it)
         }
     }
