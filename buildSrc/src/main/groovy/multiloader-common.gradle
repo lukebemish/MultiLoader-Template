@@ -3,10 +3,6 @@ plugins {
     id 'maven-publish'
 }
 
-base {
-    archivesName = "${mod_id}-${project.name}-${minecraft_version}"
-}
-
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(java_version)
     withSourcesJar()
@@ -49,8 +45,7 @@ repositories {
 ['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
     configurations."$variant".outgoing {
         capability("$group:${project.name}:$version")
-        capability("$group:${base.archivesName.get()}:$version")
-        capability("$group:$mod_id-${project.name}-${minecraft_version}:$version")
+        capability("$group:$mod_id-$minecraft_version:$version")
         capability("$group:$mod_id:$version")
     }
     publishing.publications.configureEach {
@@ -112,7 +107,6 @@ processResources {
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
-            artifactId base.archivesName.get()
             from components.java
         }
     }
